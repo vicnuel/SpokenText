@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoken Text</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/d908d58b75.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="speech">
+        <p>
+            Reconhecimento de voz
+        </p>
+        <textarea id="textarea"></textarea>
+        <div>
+            <button id="btnGravar"><i class="fas fa-microphone"></i></button>
+            <button id="btnParar" disabled><i class="fas fa-microphone-slash"></i></button>
+            <button id="btnBaixar"><i class="fas fa-download"></i></button>
+            <button id="btnLimpar"><i class="fas fa-trash-alt"></i></button>
+        </div>
+    </div>
+
+    <script src="./speech.js"></script>
+</body>
+
+</html>
