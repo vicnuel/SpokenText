@@ -1,8 +1,6 @@
-const textarea = document.querySelector("#textarea")
+const span = document.querySelector("#results")
 const btnGravar = document.querySelector("#btnGravar")
 const btnParar = document.querySelector("#btnParar")
-const btnBaixar = document.querySelector("#btnBaixar")
-const btnLimpar = document.querySelector("#btnLimpar")
 
 class speechApi {
 
@@ -11,7 +9,7 @@ class speechApi {
         const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition || null
 
         this.speechApi = new SpeechToText()
-        this.output = textarea.output
+        this.output = span.output
         this.speechApi.continuous = true
         this.speechApi.lang = "pt-BR"
 
@@ -20,10 +18,12 @@ class speechApi {
             var transcript = e.results[resultIndex][0].transcript
 
             console.log(transcript)
-            let span = document.createElement("span")
-            span.innerText = transcript
+            let p = document.createElement("p")
+            p.innerText = transcript
 
-            textarea.appendChild(span)
+            span.appendChild(p)
+
+            span.scrollTop = span.scrollHeight;
         }
         this.speechApi.onend = (e) => {
             console.log("Desligou")
@@ -48,36 +48,6 @@ btnGravar.addEventListener("click", e => {
 })
 
 btnParar.addEventListener("click", () => {
-    btnGravar.disabled = false
-    btnParar.disabled = true
-    speech.stop()
-})
-
-btnBaixar.addEventListener('click', () => {
-    var text = textarea.value
-    var filename = "speech.txt"
-
-    download(text, filename)
-})
-
-function download(text, filename) {
-    var element = document.createElement('a')
-
-    element.setAttribute('href', 'data:text/plaincharset=utf-8,' + encodeURIComponent(text))
-
-    element.setAttribute('download', filename)
-
-    element.style.display = 'none'
-
-    document.body.appendChild(element)
-
-    element.click()
-
-    document.body.removeChild(element)
-}
-
-btnLimpar.addEventListener("click", () => {
-    textarea.value = ""
     btnGravar.disabled = false
     btnParar.disabled = true
     speech.stop()
