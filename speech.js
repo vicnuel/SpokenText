@@ -2,6 +2,8 @@ const span = document.querySelector("#results")
 const btnGravar = document.querySelector("#btnGravar")
 const btnParar = document.querySelector("#btnParar")
 
+var isOn = false // variável para evitar o desligamento automático do microfone
+
 class speechApi {
 
     constructor() {
@@ -23,18 +25,23 @@ class speechApi {
 
             span.appendChild(p)
 
-            span.scrollTop = span.scrollHeight;
+            span.scrollTop = span.scrollHeight
         }
         this.speechApi.onend = (e) => {
             console.log("Desligou")
+            if (isOn) {
+                this.speechApi.start()
+            }
         }
     }
 
     start() {
+        isOn = true
         this.speechApi.start()
     }
 
     stop() {
+        isOn = false
         this.speechApi.stop()
     }
 }

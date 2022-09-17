@@ -5,12 +5,8 @@
     font-family: monospace;
   }
   
-  span {
-    overflow-y: scroll;
-  }
-  
   p {
-    color: black;
+    color: #fff;
     font-size: 2.5rem;
   }
 
@@ -21,13 +17,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: blueviolet;
+    background-color: #396575;
   }
   
+  #results::-webkit-scrollbar{
+    width: 0 !important;
+  }
+
   #results {
-    width: 80%;
-    height: 70%;
-    margin: 50px auto;
+    overflow-y: scroll;
+    width: 95%;
+    height: 90%;
+    margin: 10px auto;
     padding: 1rem;
     border: none;
     outline: 0;
