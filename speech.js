@@ -15,6 +15,13 @@ class speechApi {
         this.speechApi.continuous = true
         this.speechApi.lang = "pt-BR"
 
+        if (SpeechToText === null) {
+            let p = document.createElement("p")
+            p.innerText = "Não estamos oferecendo suporte para o seu navegador agora, tente usa o Google Chrome ou o Edge."
+
+            span.appendChild(p)
+        }
+
         this.speechApi.onresult = (e) => {
             var resultIndex = e.resultIndex
             var transcript = e.results[resultIndex][0].transcript
