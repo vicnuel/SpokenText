@@ -9,7 +9,7 @@ class speechApi {
     constructor() {
 
         const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition || null
-
+        console.log(SpeechToText)
         this.speechApi = new SpeechToText()
         this.output = span.output
         this.speechApi.continuous = true
