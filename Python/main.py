@@ -56,27 +56,47 @@ class WhiteLine:
 def break_line(text):
     tamanho = len(text)
     linhas = []
-    if len(text) > 56:
-        nLinhas = tamanho // 56 + 1
-        nResto = tamanho % 56
+    if len(text) > 50:
+        nLinhas = tamanho // 50 + 1
+        nResto = tamanho % 50
         linhas = []
-        ultimo = 56
+        ultimo = 0
         for i in range(nLinhas):
-            if len(text[56:]) > i * 56:
-                if text[(i+1)*56-1] == ' ':
-                    linhas.append(text[i*56:(i+1)*56])
+            if len(text[50:]) > i * 50:
+                if text[ultimo+50] == ' ':
+                    linhas.append(text[ultimo:ultimo+50])
+                    ultimo = ultimo+50+1
+                    # print(linhas)
                 else:
-
-                    for y in range(56):
-                        if text[(i+1)*56-y] == ' ':
-                            ultimo = (i+1)*56-y
-                            linhas.append(text[i*56:(i+1)*56-y])
+                    for y in range(50):
+                        if text[ultimo+50-y] == ' ':
+                            linhas.append(text[ultimo:ultimo+50-y])
+                            # print(linhas)
+                            ultimo = ultimo+50-y+1
+                            # print(ultimo)
                             break
             else:
-                linhas.append(text[ultimo+1:])
+                if len(text[ultimo:]) > 50:
+                    if text[ultimo+50] == ' ':
+                        linhas.append(text[ultimo:ultimo+50])
+                        ultimo = ultimo+50+1
+                        # print(linhas)
+                        linhas.append(text[ultimo:])
+                        # print(linhas)
+                    else:
+                        for y in range(50):
+                            if text[ultimo+50-y] == ' ':
+                                linhas.append(text[ultimo:ultimo+50-y])
+                                # print(linhas)
+                                ultimo = ultimo+50-y+1
+                                # print(ultimo)
+                                break
+                linhas.append(text[ultimo:])
+                # print(linhas)
 
     else:
         linhas.append(text)
+        # print(linhas)
 
     return linhas
 
@@ -90,9 +110,10 @@ screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 clock = pygame.time.Clock()
 x, y = screen.get_size()
 
-font = pygame.font.SysFont("Liberation Sans", 65)
+font = pygame.font.SysFont("Liberation Sans", 58)
 
 white = WhiteLine(pygame.Rect(0, 0, x, y), font, YELLOW, BLACK)
+#result="o que tem para hoje olhando para os seus dedos minúsculos enquanto você fala de coisas que tem aprendido a valorizar que tem insistido em gravar dentro do meu crânio para que os Olhos enxergam quando se virarem até que o buraco se cubra eu me esqueça como contar 1 2 3 4 e passa a respirar poeira poeira de estrela e da mão não tem nada maior que você aqui importância incomparável emergência te amo como quem acende uma vela no espaço te amo desde a dificuldade de se acender uma vela no espaço na dimensão infinita de um universo sem esquecimentos aqui cheia de sons canto teu codinome"
 
 while True:
     for event in pygame.event.get():
@@ -100,15 +121,18 @@ while True:
             pygame.quit()
             sys.exit(0)
         else:
-            # screen.fill(pygame.color.Color('black'))
+
             result = sp()
+
             if (result != False):
                 transcribe = break_line(result)
             else:
-                transcribe = ['...']
-
+                transcribe = ['']
+            # print("transcribe\n")
+            # print(transcribe)
+            # print("\n")
             for y in range(len(transcribe)):
                 white.update(transcribe[y])
                 white.draw(screen)
-            pygame.display.flip()
+                pygame.display.flip()
             clock.tick(60)
