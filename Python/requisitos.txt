@@ -1,7 +1,0 @@
-- Versão mais recente do Python
-- Instalar a biblioteca Speech Recognition 
-	pip install SpeechRecognition 
-- Instalar pyaudio
-	pip install pyaudio
-- Instalar o pygame
- 	pip install pygame
