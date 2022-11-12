@@ -11,7 +11,8 @@ const screen = document.querySelector("#screen")
 var isOn = false // variável para evitar o desligamento automático do microfone
 var viewImgs = false // variável para controlar a exibição das imagens
 var themeSunny = false // variável para controlar o tema do site 
-var isHover = $(bottom).is(":hover") || $(topPage).is(":hover")
+var isHover = $(bottom).is(":hover") || $(topPage).is(":hover") // impedir que os botões desapareçam quando o mouse estiver em cima deles
+var isHoverLast = false // impedir que os botões apareção quando o texto é atualizado (algo chama o evendo de "mouse out" e o botões aparecem com visibilidade 0.5)
 
 class speechApi {
 
@@ -148,23 +149,24 @@ document.addEventListener("fullscreenchange", e => {
 let visibility = function () {
     bottom.style.opacity = "1"
     topPage.style.opacity = "1"
-    isHover = $(bottom).is(":hover") || $(topPage).is(":hover")
+    isHoverLast = true
 }
 
 let invisibility = function () {
     //verificar se o mouse está em cima
     isHover = $(bottom).is(":hover") || $(topPage).is(":hover")
-    if (!isHover) {
+    if (!isHover && isHoverLast) {
         setTimeout(() => {
-            if (!isHover) {
+            if (!isHover && isHoverLast) {
                 bottom.style.opacity = "0.5"
                 topPage.style.opacity = "0.5"
             }
 
             setTimeout(() => {
-                if (!isHover) {
+                if (!isHover && isHoverLast) {
                     bottom.style.opacity = "0"
                     topPage.style.opacity = "0"
+                    isHoverLast = false
                 }
 
             }, 5000)
