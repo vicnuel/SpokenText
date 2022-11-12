@@ -11,7 +11,7 @@ const screen = document.querySelector("#screen")
 var isOn = false // variável para evitar o desligamento automático do microfone
 var viewImgs = false // variável para controlar a exibição das imagens
 var themeSunny = false // variável para controlar o tema do site 
-
+var isHover = $(bottom).is(":hover") || $(topPage).is(":hover")
 
 class speechApi {
 
@@ -148,17 +148,29 @@ document.addEventListener("fullscreenchange", e => {
 let visibility = function () {
     bottom.style.opacity = "1"
     topPage.style.opacity = "1"
+    isHover = $(bottom).is(":hover") || $(topPage).is(":hover")
 }
 
-let invisibility = function (element) {
-    setTimeout(() => {
-        bottom.style.opacity = "0.5"
-        topPage.style.opacity = "0.5"
+let invisibility = function () {
+    //verificar se o mouse está em cima
+    isHover = $(bottom).is(":hover") || $(topPage).is(":hover")
+    if (!isHover) {
         setTimeout(() => {
-            bottom.style.opacity = "0"
-            topPage.style.opacity = "0"
+            if (!isHover) {
+                bottom.style.opacity = "0.5"
+                topPage.style.opacity = "0.5"
+            }
+
+            setTimeout(() => {
+                if (!isHover) {
+                    bottom.style.opacity = "0"
+                    topPage.style.opacity = "0"
+                }
+
+            }, 5000)
         }, 5000)
-    }, 5000)
+    }
+
 }
 
 // Element visibility events

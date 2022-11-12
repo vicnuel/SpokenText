@@ -11,17 +11,18 @@ r = sr.Recognizer()
 
 def SpokenText():
 
-    with sr.Microphone(1) as source:
+    with sr.Microphone() as source:
         print("Ouvindo... ")
-        r.adjust_for_ambient_noise(source, 1)  # Adjust for ambient
+        print(type(source))
+        r.adjust_for_ambient_noise(source, 0.5)  # Adjust for ambient
         audio = r.listen(source)
     try:
         text = r.recognize_google(audio, language="pt-BR")
-        print(text)
+        # print(text)
         return text
     except Exception:
         return False
 
 
-# while True:
-    # print(Spoken_Text())
+while True:
+    print(SpokenText())
