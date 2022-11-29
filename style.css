@@ -22,11 +22,11 @@
     background: #8DACB8;
     transform: rotate(-20.63deg) translateY(-75%);
     position: absolute;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .logo{
-  z-index: 2;
-  position: absolute;
+  /* z-index: 2;
+  position: absolute; */
 }
 

@@ -70,7 +70,7 @@ span {
   background-size: 70px;
 }
 
-.viewImgs {
+.english {
   display: flex;
   align-items: center;
   font-size: 2rem;
@@ -79,7 +79,7 @@ span {
   
 }
 
-#checkViewImgs {
+#checkEnglish {
   width: 70px;
   height: 70px;
   background-color: transparent;
@@ -148,7 +148,7 @@ button {
   #theme,
   #screen,
   #btnMic,
-  #checkViewImgs,
+  #checkEnglish,
   #btnReduce,
   #btnIncrease {
     width: 50px;

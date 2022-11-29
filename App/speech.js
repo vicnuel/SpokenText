@@ -1,6 +1,6 @@
 const span = document.querySelector("#results")
 const btnMic = document.querySelector("#btnMic")
-const btnCheck = document.querySelector("#checkViewImgs")
+const btnCheck = document.querySelector("#checkEnglish")
 const btnReduceFont = document.querySelector("#btnReduce")
 const btnIncreaseFont = document.querySelector("#btnIncrease")
 const bottom = document.querySelector("#bottom")
@@ -9,7 +9,7 @@ const theme = document.querySelector("#theme");
 const screen = document.querySelector("#screen")
 
 var isOn = false // variável para evitar o desligamento automático do microfone
-var viewImgs = false // variável para controlar a exibição das imagens
+var viewImgs = false // variável para controlar a exibição do botão checkEnglish
 var themeSunny = false // variável para controlar o tema do site 
 var isHover = $(bottom).is(":hover") || $(topPage).is(":hover") // impedir que os botões desapareçam quando o mouse estiver em cima deles
 var isHoverLast = false // impedir que os botões apareção quando o texto é atualizado (algo chama o evendo de "mouse out" e o botões aparecem com visibilidade 0.5)
@@ -83,11 +83,28 @@ btnCheck.addEventListener("click", e => {
     if (viewImgs) {
         viewImgs = false
         btnCheck.style.backgroundImage = "url('../icons/button_unchecked.png')"
+
+        let isRunning = isOn
+        speech.stop()
+        // mudar idioma para português
+        speech.speechApi.lang = "pt-BR"
+
+
+        if (isRunning) {
+            speech.start()
+        }
     }
     else {
         viewImgs = true
         btnCheck.style.backgroundImage = "url('../icons/button_checked.png')"
-        //btnCheck.style.
+
+        let isRunning = isOn
+        speech.stop()
+        // mudar idioma para inglês
+        speech.speechApi.lang = "en"
+        if (isRunning) {
+            speech.start()
+        }
     }
 })
 
