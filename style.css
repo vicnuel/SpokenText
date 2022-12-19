@@ -112,6 +112,8 @@ body {
 
 .bottom{
   width: 100%;
+  /* usar espaço que sobrou */
+  /* height: 20vh; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,6 +121,7 @@ body {
 
   margin-top: 7%;
   margin-bottom: 2%;
+
 }
 
 .bottom a{
@@ -174,18 +177,20 @@ body {
   .nav .logo{
     padding-left: 0;
     margin-bottom: 4%;
-    transform: translateX(4%);
+    transform: translateX(2.5%);
   }
 
   .nav ul{
     padding-right: 0;
     margin: auto;
+    width: 100%;
 
     justify-content: space-evenly;
   }
 
   .container {
     margin-top: 5%;
+    width: 100%;
   }
 
 
@@ -199,5 +204,33 @@ body {
 
   .text h1{
     font-size: 2.8rem;
+  }
+
+  .bottom a{
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 1010px) and (min-height: 700px) {
+  body{
+    height: 100vh;
+  }
+
+  .container {
+    margin-top: 0;
+  }
+
+  .text h1 {
+    font-size: 4.5rem;
+  }
+
+  .text p {
+    font-size: 1.7rem;
+  }
+
+  .bottom{
+    position: absolute;
+    bottom: 2%;
+    margin: 0 auto;
   }
 }
