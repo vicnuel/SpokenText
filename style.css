@@ -112,15 +112,13 @@ body {
 
 .bottom{
   width: 100%;
-  /* usar espaço que sobrou */
-  /* height: 20vh; */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
 
   margin-top: 7%;
-  margin-bottom: 2%;
+  /* margin-bottom: 2%; */
 
 }
 
@@ -164,6 +162,10 @@ body {
   .container img {
     width: 95%;
     margin-top: 10%;
+  }
+
+  .bottom{
+    margin-bottom: 2%;
   }
 }
 
