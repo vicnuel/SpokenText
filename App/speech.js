@@ -18,6 +18,14 @@ class speechApi {
     constructor() {
 
         const SpeechToText = window.SpeechRecognition || window.webkitSpeechRecognition || null
+
+        if (SpeechToText === null) {
+            let p = document.createElement("p")
+            p.innerText = "Não estamos oferecendo suporte para o seu navegador agora, tente usa o Google Chrome ou o Edge."
+
+            span.appendChild(p)
+        }
+
         console.log(SpeechToText)
         this.speechApi = new SpeechToText()
         this.output = span.output
@@ -30,13 +38,6 @@ class speechApi {
         }
         else {
             this.speechApi.lang = "pt-BR"
-        }
-
-        if (SpeechToText === null) {
-            let p = document.createElement("p")
-            p.innerText = "Não estamos oferecendo suporte para o seu navegador agora, tente usa o Google Chrome ou o Edge."
-
-            span.appendChild(p)
         }
 
         this.speechApi.onresult = (e) => {
