@@ -1,6 +1,6 @@
 const span = document.querySelector("#results")
 const btnMic = document.querySelector("#btnMic")
-const btnCheck = document.querySelector("#checkEnglish")
+const btnLang = document.querySelector("#lang")
 const btnReduceFont = document.querySelector("#btnReduce")
 const btnIncreaseFont = document.querySelector("#btnIncrease")
 const bottom = document.querySelector("#bottom")
@@ -9,7 +9,6 @@ const theme = document.querySelector("#theme");
 const screen = document.querySelector("#screen")
 
 var isOn = false // variável para evitar o desligamento automático do microfone
-var viewImgs = false // variável para controlar a exibição do botão checkEnglish
 var themeSunny = false // variável para controlar o tema do site 
 var isHover = $(bottom).is(":hover") || $(topPage).is(":hover") // impedir que os botões desapareçam quando o mouse estiver em cima deles
 var isHoverLast = false // impedir que os botões apareção quando o texto é atualizado (algo chama o evendo de "mouse out" e o botões aparecem com visibilidade 0.5)
@@ -23,7 +22,15 @@ class speechApi {
         this.speechApi = new SpeechToText()
         this.output = span.output
         this.speechApi.continuous = true
-        this.speechApi.lang = "pt-BR"
+
+        // verificar se o idioma já foi selecionado
+        if (localStorage.getItem("lang") !== null) {
+            this.speechApi.lang = localStorage.getItem("lang")
+            btnLang.selectedIndex = localStorage.getItem("langIndex")
+        }
+        else {
+            this.speechApi.lang = "pt-BR"
+        }
 
         if (SpeechToText === null) {
             let p = document.createElement("p")
@@ -78,34 +85,24 @@ btnMic.addEventListener("click", e => {
     }
 })
 
-btnCheck.addEventListener("click", e => {
+btnLang.addEventListener("click", e => {
     console.log("Clicou")
-    if (viewImgs) {
-        viewImgs = false
-        btnCheck.style.backgroundImage = "url('../icons/button_unchecked.png')"
 
-        let isRunning = isOn
-        speech.stop()
-        // mudar idioma para português
-        speech.speechApi.lang = "pt-BR"
+    let isRunning = isOn
+    speech.stop()
+    // mudar para idioma selecionado
+    const index = btnLang.selectedIndex
+    speech.speechApi.lang = btnLang.options[index].value
 
-
-        if (isRunning) {
-            speech.start()
-        }
+    console.log(speech.speechApi.lang)
+    if (isRunning) {
+        speech.start()
     }
-    else {
-        viewImgs = true
-        btnCheck.style.backgroundImage = "url('../icons/button_checked.png')"
 
-        let isRunning = isOn
-        speech.stop()
-        // mudar idioma para inglês
-        speech.speechApi.lang = "en"
-        if (isRunning) {
-            speech.start()
-        }
-    }
+    // salvar no local storage
+    localStorage.setItem("lang", btnLang.options[index].value)
+    localStorage.setItem("langIndex", index)
+
 })
 
 theme.addEventListener("click", e => {
